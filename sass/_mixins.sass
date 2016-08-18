@@ -1,0 +1,49 @@
+/*
+ * Varibles from styles
+ *
+ * @author Andrey Chechkin
+ * @license GNU/AGPLv3
+ * @see {@link https://www.gnu.org/licenses/agpl-3.0.txt|License}
+ */
+
+@import "variables"
+
+=fontAdd($name, $path)
+	@font-face
+		font-family: $name
+		src: url('#{$fontsPrefix}#{$path}.eot')
+		src: url('#{$fontsPrefix}#{$path}.eot?#iefix') format('embedded-opentype'),
+		url('#{$fontsPrefix}#{$path}.woff') format('woff'),
+		url('#{$fontsPrefix}#{$path}.ttf') format('truetype')
+		font-weight: normal
+		font-style: normal
+
+=linearGradient($top, $bottom)
+	background: $top; /* Old browsers */
+	background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+
+=bg($path, $addit)
+	background: url('#{$imgPrefix}#{$path}') $addit
+
+=sizeMixin($item)
+	width: $item
+	height: $item
+
+=transitionMixin($item)
+	transition: $item $transition-type $transition-speed
+
+=resetCss
+	margin: 0
+	padding: 0
+
+=absolute($top:auto, $right:auto, $bottom:auto, $left:auto)
+	position: absolute
+	top: $top
+	right: $right
+	bottom: $bottom
+	left: $left

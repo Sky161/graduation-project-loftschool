@@ -1,0 +1,23 @@
+{
+  "name": "graduation-project-loftschool",
+  "version": "1.0.0",
+  "description": "This if graduation project for online education Loftschool",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "browser-sync": "^2.10.1",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-watch": "^4.3.9"
+  },
+  "scripts": {
+    "postinstall": "bower i && gulp"
+  },
+  "author": "Andrey Chechkin",
+  "license": "ISC"
+}

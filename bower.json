@@ -1,0 +1,16 @@
+{
+  "name": "graduation-project-loftschool",
+  "description": "",
+  "main": "app/",
+  "authors": [
+    "Andrey Chechkin"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Sky161/test-loftschool",
+  "moduleType": [
+    "globals"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  }
+}

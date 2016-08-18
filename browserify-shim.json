@@ -1,0 +1,13 @@
+{
+	"jquery": {
+		"path": "./app/components/jquery/dist/jquery.min.js",
+		"exports": "$"
+	},
+	"bootstrap": {
+		"path": "./app/components/bootstrap-sass/assets/javascripts/bootstrap.min.js",
+		"exports": null,
+		"depends": {
+			"jquery": "$"
+		}
+	}
+}
