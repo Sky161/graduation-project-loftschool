@@ -52,7 +52,87 @@ html
 					font-weight: normal
 
 			.container
-				padding: 0 0 45px
+				font-size: 0
+
+				.column
+					width: 50%
+					font-size: 12px
+					display: inline-block
+					vertical-align: top
+
+					.search
+						background: #f0f0f0
+						position: relative
+						padding: 10px 16px
+
+						input
+							width: 100%
+							height: 26px
+							border: none
+							padding: 0 25px
+							color: #9f9f9f
+							border-radius: 12px
+							font-family: "firasansLight"
+							outline: none
+
+						.icon
+							+bg("search.png", no-repeat)
+							width: 13px
+							height: 15px
+							display: block
+							+absolute(16px, auto, auto, 22px)
+
+						#search-friends
+							padding-left: 28px
+
+					&:first-child
+						.list
+							border-right: 1px solid #f0f0f0
+
+					.list
+						height: 354px
+						overflow: auto
+						padding: 0 16px
+
+						.title
+							padding: 10px 0 1px
+
+						ul
+							+resetCss
+							list-style-type: none
+
+							li
+								display: flex
+								align-items: center
+								border-top: 1px solid #f0f0f0
+								height: 58px
+
+								&:hover
+									background: #f0f0f0
+									cursor: move
+									+transitionMixin(background)
+
+								img
+									border-radius: 100%
+									margin-right: 8px
+									margin-left: 5px
+
+								p
+									margin: 0
+
+								span
+									margin-left: auto
+									display: block
+									margin-right: 5px
+									cursor: pointer
+
+								.add
+									+bg("pluse.png", no-repeat)
+									+sizeMixin(16px)
+
+								.remove
+									+bg("close.png", no-repeat)
+									+sizeMixin(14px)
 
 			footer
 				width: 100%
@@ -71,3 +151,4 @@ html
 					border: none
 					border-radius: 10px
 					margin: 9px 5px 0 0
+					outline: none
