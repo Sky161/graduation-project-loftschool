@@ -7,11 +7,6 @@
 */
 "use strict";
 
-require("jquery");
-var bootstrap = require("bootstrap");
-
 document.addEventListener("DOMContentLoaded", () => {
-	bootstrap;
-
 	console.log("Load");
 });
