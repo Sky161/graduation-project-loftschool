@@ -8,11 +8,16 @@
 
 @import "./variables"
 @import "./mixins"
-@import "../app/components/bootstrap-sass/assets/stylesheets/bootstrap"
+@import "../app/components/normalize-scss/_normalize.scss"
 
 html
-  width: 100%
-  min-height: 100%
+	width: 100%
+	height: 100%
 
-  *
-    box-sizing: border-box
+	body
+		width: 100%
+		min-width: 980px
+		max-width: 1980px
+
+		*
+			box-sizing: border-box

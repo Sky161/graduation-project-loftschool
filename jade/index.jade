@@ -8,7 +8,30 @@ html(lang='ru')
 		link(rel="stylesheet", href="build.css")
 		script(src="build.js")
 	body
-		header
 		main.content
-			h1 Hello, world!
-		footer
+			header
+				h1 Выберите друзей
+			.container
+				.column#friends-vk
+					.search
+						label(for="search-friends").icon
+						input(type="text", id="search-friends", name="search-friends", placeholder="Начните вводить имя друга")
+					.list
+						.title Ваши друзья
+						ul
+							li
+								img(src="http://cdn.stripersonline.com/6/6f/50x50px-ZC-6f67bd7e_125x125px-LS-afddea1f_haha-lol-manolo-troll-troll-face-Favim_com-143216.jpeg")
+								p Имя Фамилия
+								span.add(title="Добавить в избранное")
+				.column#favorite
+					.search
+						input(type="text", name="search-favorite", placeholder="Название")
+					.list
+						.title Друзья в списке
+					ul
+						li
+							img(src="http://cdn.stripersonline.com/6/6f/50x50px-ZC-6f67bd7e_125x125px-LS-afddea1f_haha-lol-manolo-troll-troll-face-Favim_com-143216.jpeg")
+							p Имя Фамилия
+							span.remove(title="Удалить из избраного")
+			footer
+				button.btn Сохранить

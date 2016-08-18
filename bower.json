@@ -11,6 +11,6 @@
     "globals"
   ],
   "dependencies": {
-    "bootstrap-sass": "^3.3.7"
+    "normalize-scss": "^3.0.3"
   }
 }
