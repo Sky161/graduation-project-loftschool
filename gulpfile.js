@@ -14,12 +14,11 @@ var tplPath = './';
 gulp.task('scripts', function() {
 
 	gulp.src(tplPath + 'scripts/main.js')
-		.pipe(browserify({
-			shim: require("./browserify-shim.json")
-		}))
+		.pipe(browserify())
 		.pipe(plumber())
 		.pipe(rename("build.js"))
 		.pipe(gulp.dest(tplPath +'/app/'))
+		.pipe(browserSync.stream());
 });
 
 gulp.task('jade', function () {
@@ -51,15 +50,12 @@ gulp.task('server', function(){
 gulp.task('watch', ['jade', 'sass', 'scripts', 'server'], function () {
 	watch(tplPath + '/scripts/**/*.js', function(){
 		gulp.start("scripts");
-		browserSync.reload();
 	});
 	watch(tplPath + '/jade/**/*.jade', function(){
 		gulp.start("jade");
-		browserSync.reload();
 	});
 	watch(tplPath + '/sass/**/*.sass', function(){
 		gulp.start("sass");
-		browserSync.reload();
 	});
 });
 

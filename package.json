@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "This if graduation project for online education Loftschool",
   "main": "gulpfile.js",
+  "browserify": {
+    "transform": [
+      ["jadeify", { "pretty": true,  "compileDebug": true }]
+    ]
+  },
   "devDependencies": {
     "bower": "^1.7.9",
     "browser-sync": "^2.10.1",
@@ -13,7 +18,8 @@
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
-    "gulp-watch": "^4.3.9"
+    "gulp-watch": "^4.3.9",
+    "jadeify": "^4.6.0"
   },
   "scripts": {
     "postinstall": "bower i && gulp"
