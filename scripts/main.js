@@ -12,6 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
 	vkApi.login().then(() => {
 		return vkApi.getApi("friends.get", {fields: "photo_50"})
 	}).then((response) => {
-		console.log(response);
+		let tmp = require("../jade/module-template/list-friens.jade");
+
+		let render = tmp({
+			"items": response.response
+		});
+
+		document.querySelector("#friends-vk .list").innerHTML = render;
+
 	}).catch((e) => { alert(`Ошибка: ${e.message}`); });
 });
