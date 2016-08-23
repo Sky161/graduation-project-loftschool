@@ -1,0 +1,6 @@
+ul
+	- each item in items
+		li(data-id="#{item.user_id}")
+			img(src="#{item.photo_50}")
+			p= item.first_name + " " + item.last_name
+			span.remove(title="Удалить из избраного")

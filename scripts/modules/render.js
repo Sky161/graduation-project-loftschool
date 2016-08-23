@@ -9,5 +9,5 @@
 
 module.exports = (selector, data, template) => {
 	let htmlTmp = template(data);
-	document.querySelector(selector).innerHTML = htmlTmp;
+	selector.innerHTML = htmlTmp;
 }
