@@ -14,8 +14,8 @@ var tplPath = './';
 gulp.task('scripts', function() {
 
 	gulp.src(tplPath + 'scripts/main.js')
-		.pipe(browserify())
 		.pipe(plumber())
+		.pipe(browserify())
 		.pipe(rename("build.js"))
 		.pipe(gulp.dest(tplPath +'/app/'))
 		.pipe(browserSync.stream());

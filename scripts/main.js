@@ -54,5 +54,29 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
+		let dragable = null;
+		let offsetX = 0;
+		let offsetY = 0;
+
+		vkListContainer.addEventListener("mousedown", function(e) {
+			let thisTarget = e.target.closest("li");
+			if(!thisTarget) return;
+			dragable = thisTarget;
+			offsetX = e.offsetX;
+			offsetY = e.offsetY;
+		});
+
+		container.addEventListener("mousemove", function(e) {
+			if(dragable) {
+				dragable.style.position = "absolute";
+				dragable.style.left = `${e.clientX - offsetX}px`;
+				dragable.style.top = `${e.clientY - offsetY}px`;
+			}
+		});
+
+		container.addEventListener("mouseup", function(e) {
+			dragable = null;
+		});
+
 	}).catch((e) => { alert(`Ошибка: ${e.message}`); });
 });
