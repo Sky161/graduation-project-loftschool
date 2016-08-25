@@ -60,18 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
 			thisTarget.style.position = "absolute";
 			let offsetX = e.offsetX;
 			let offsetY = e.offsetY;
-			thisTarget.style.top = `${e.clientY - offsetY}px`;
-			thisTarget.style.left = `${e.clientX - offsetX}px`;
-			document.body.appendChild(thisTarget);
+			let coordinats = container.parentElement.getBoundingClientRect();
+			const move = (e) => {
+				thisTarget.style.top = `${e.pageY - coordinats.top - offsetY}px`;
+				thisTarget.style.left = `${e.pageX - coordinats.left - offsetX}px`;
+			}
+
+			move(e);
 
 			container.addEventListener("mousemove", (e) => {
 				if(!thisTarget) return false;
-				thisTarget.style.top = `${e.clientY - offsetY}px`;
-				thisTarget.style.left = `${e.clientX - offsetX}px`;
+				move(e);
 			});
 
 			document.addEventListener("mouseup", (e) => {
-				thisTarget = null;
+				if(!thisTarget) return false;
+				thisTarget.removeAttribute("style");
 			});
 		});
 
