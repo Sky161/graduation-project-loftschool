@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		let vkList = response.response
 		let favoriteList = [];
 
-		let vkListContainer = document.querySelector("#friends-vk .list");
-		let favoriteListContainer = document.querySelector("#favorite .list");
+		let vkListContainer = document.querySelector("#friends-vk .list .body");
+		let favoriteListContainer = document.querySelector("#favorite .list .body");
 		let container = document.querySelector(".container");
 
 		let tmpVklist = require("../jade/module-template/list-friends.jade");
@@ -56,8 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		vkListContainer.addEventListener("mousedown", (e) => {
 			let thisTarget = e.target.closest("li");
-			if(!thisTarget) return false;
+			if(!thisTarget || e.target.className === "add") return false;
 			thisTarget.style.position = "absolute";
+			thisTarget.style.zIndex = 100;
 			let offsetX = e.offsetX;
 			let offsetY = e.offsetY;
 			let coordinats = container.parentElement.getBoundingClientRect();
@@ -74,8 +75,18 @@ document.addEventListener("DOMContentLoaded", () => {
 			});
 
 			document.addEventListener("mouseup", (e) => {
-				if(!thisTarget) return false;
-				thisTarget.removeAttribute("style");
+				let coordinatsDrop = favoriteListContainer.getBoundingClientRect();
+				let left = coordinatsDrop.left;
+				let right = coordinatsDrop.left + coordinatsDrop.width
+				let top = coordinatsDrop.top
+				let bottom = coordinatsDrop.top + coordinatsDrop.height
+
+				if(e.clientX > left && e.clientX < right && e.clientY > top && e.clientY < bottom) {
+					thisTarget = null;
+				}else{
+					if(!thisTarget) return false;
+					thisTarget.removeAttribute("style");
+				}
 			});
 		});
 
