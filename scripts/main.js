@@ -54,28 +54,25 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
-		let dragable = null;
-		let offsetX = 0;
-		let offsetY = 0;
-
-		vkListContainer.addEventListener("mousedown", function(e) {
+		vkListContainer.addEventListener("mousedown", (e) => {
 			let thisTarget = e.target.closest("li");
-			if(!thisTarget) return;
-			dragable = thisTarget;
-			offsetX = e.offsetX;
-			offsetY = e.offsetY;
-		});
+			if(!thisTarget) return false;
+			thisTarget.style.position = "absolute";
+			let offsetX = e.offsetX;
+			let offsetY = e.offsetY;
+			thisTarget.style.top = `${e.clientY - offsetY}px`;
+			thisTarget.style.left = `${e.clientX - offsetX}px`;
+			document.body.appendChild(thisTarget);
 
-		container.addEventListener("mousemove", function(e) {
-			if(dragable) {
-				dragable.style.position = "absolute";
-				dragable.style.left = `${e.clientX - offsetX}px`;
-				dragable.style.top = `${e.clientY - offsetY}px`;
-			}
-		});
+			container.addEventListener("mousemove", (e) => {
+				if(!thisTarget) return false;
+				thisTarget.style.top = `${e.clientY - offsetY}px`;
+				thisTarget.style.left = `${e.clientX - offsetX}px`;
+			});
 
-		container.addEventListener("mouseup", function(e) {
-			dragable = null;
+			document.addEventListener("mouseup", (e) => {
+				thisTarget = null;
+			});
 		});
 
 	}).catch((e) => { alert(`Ошибка: ${e.message}`); });
