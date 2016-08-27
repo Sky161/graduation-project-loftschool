@@ -39,14 +39,18 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
+		const renderFavoriteList = (idElement) => {
+			moveObj(idElement, vkList, favoriteList);
+			render(favoriteListContainer, {"items": favoriteList}, tmpFavoriteList);
+			render(vkListContainer, {"items": vkList}, tmpVklist);
+		};
+
 		container.addEventListener("click", function(e) {
 			let thisTarget = e.target;
 			let id = Number(thisTarget.parentElement.dataset.id);
 
 			if(thisTarget.className === "add"){
-				moveObj(id, vkList, favoriteList);
-				render(favoriteListContainer, {"items": favoriteList}, tmpFavoriteList);
-				render(vkListContainer, {"items": vkList}, tmpVklist);
+				renderFavoriteList(id);
 			}else if(thisTarget.className === "remove") {
 				moveObj(id, favoriteList, vkList);
 				render(favoriteListContainer, {"items": favoriteList}, tmpFavoriteList);
@@ -60,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			thisTarget.style.position = "absolute";
 			thisTarget.style.zIndex = 100;
 			let offsetX = e.offsetX;
-			let offsetY = e.offsetY;
+			let offsetY = e.offsetY + vkListContainer.parentElement.scrollTop;
 			let coordinats = container.parentElement.getBoundingClientRect();
 			const move = (e) => {
 				thisTarget.style.top = `${e.pageY - coordinats.top - offsetY}px`;
@@ -69,23 +73,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			move(e);
 
-			container.addEventListener("mousemove", (e) => {
+			thisTarget.getElementsByTagName("img")[0].ondragstart = () => { return false; }
+
+			document.addEventListener("mousemove", (e) => {
 				if(!thisTarget) return false;
 				move(e);
 			});
 
 			document.addEventListener("mouseup", (e) => {
-				let coordinatsDrop = favoriteListContainer.getBoundingClientRect();
+				let coordinatsDrop = favoriteListContainer.parentElement.getBoundingClientRect();
 				let left = coordinatsDrop.left;
 				let right = coordinatsDrop.left + coordinatsDrop.width
 				let top = coordinatsDrop.top
 				let bottom = coordinatsDrop.top + coordinatsDrop.height
 
-				if(e.clientX > left && e.clientX < right && e.clientY > top && e.clientY < bottom) {
+				console.log(coordinatsDrop);
+
+				const resetDragable = () => {
+					thisTarget.removeAttribute("style");
 					thisTarget = null;
+				}
+
+				if((e.clientX > left && e.clientX < right) && (e.clientY > top && e.clientY < bottom)) {
+					if(!thisTarget) return false;
+					let id = Number(thisTarget.dataset.id);
+					renderFavoriteList(id);
+					resetDragable();
 				}else{
 					if(!thisTarget) return false;
-					thisTarget.removeAttribute("style");
+					resetDragable();
 				}
 			});
 		});

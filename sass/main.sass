@@ -24,41 +24,6 @@ html
 		font-size: 12px
 		font-family: "firasansMedium", sans-serif
 
-		li
-			display: flex
-			align-items: center
-			border-top: 1px solid #f0f0f0
-			height: 58px
-			background: #fff
-			width: 260px
-			user-select: none
-
-			&:hover
-				background: #f0f0f0
-				+transitionMixin(background)
-
-			img
-				border-radius: 100%
-				margin-right: 8px
-				margin-left: 5px
-
-			p
-				margin: 0
-
-			span
-				margin-left: auto
-				display: block
-				margin-right: 5px
-				cursor: pointer
-
-			.add
-				+bg("pluse.png", no-repeat)
-				+sizeMixin(16px)
-
-			.remove
-				+bg("close.png", no-repeat)
-				+sizeMixin(14px)
-
 		*
 			box-sizing: border-box
 
@@ -131,6 +96,7 @@ html
 						height: 354px
 						overflow: auto
 						padding: 0 16px
+						user-select: none
 
 						.title
 							padding: 10px 0 1px
@@ -138,6 +104,40 @@ html
 						ul
 							+resetCss
 							list-style-type: none
+
+							li
+								display: flex
+								align-items: center
+								border-top: 1px solid #f0f0f0
+								height: 58px
+								background: #fff
+								width: 260px
+
+								&:hover
+									background: #f0f0f0
+									+transitionMixin(background)
+
+								img
+									border-radius: 100%
+									margin-right: 8px
+									margin-left: 5px
+
+								p
+									margin: 0
+
+								span
+									margin-left: auto
+									display: block
+									margin-right: 5px
+									cursor: pointer
+
+								.add
+									+bg("pluse.png", no-repeat)
+									+sizeMixin(16px)
+
+								.remove
+									+bg("close.png", no-repeat)
+									+sizeMixin(14px)
 
 			footer
 				width: 100%
