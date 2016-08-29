@@ -12,7 +12,7 @@ let login = () => {
 		VK.init({
 			apiId: 5597966
 		});
-
+		
 		VK.Auth.login((response) => {
 			if(response.status === "connected") {
 				resolve(response);

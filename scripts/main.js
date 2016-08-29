@@ -14,19 +14,31 @@ const moveObj = require("./modules/move-object");
 
 document.addEventListener("DOMContentLoaded", () => {
 	vkApi.login().then(() => {
-		return vkApi.getApi("friends.get", {fields: "photo_50"})
+		if(localStorage.favoriteList) {
+			let response = {};
+			response.response = JSON.parse(localStorage.vkList);
+			return response;
+		} else {
+			return vkApi.getApi("friends.get", {fields: "photo_50"})
+		}
 	}).then((response) => {
 		let vkList = response.response
 		let favoriteList = [];
 
+		if(localStorage.favoriteList) {
+			favoriteList = JSON.parse(localStorage.favoriteList);
+		}
+
 		let vkListContainer = document.querySelector("#friends-vk .list .body");
 		let favoriteListContainer = document.querySelector("#favorite .list .body");
 		let container = document.querySelector(".container");
+		let saveBtn = document.querySelector("footer .btn")
 
 		let tmpVklist = require("../jade/module-template/list-friends.jade");
 		let tmpFavoriteList = require("../jade/module-template/list-favorite.jade");
 
 		render(vkListContainer, {"items": vkList}, tmpVklist);
+		render(favoriteListContainer, {"items": favoriteList}, tmpFavoriteList);
 
 		container.addEventListener("input", function(e) {
 			let inpVal = e.target.value;
@@ -87,8 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				let top = coordinatsDrop.top
 				let bottom = coordinatsDrop.top + coordinatsDrop.height
 
-				console.log(coordinatsDrop);
-
 				const resetDragable = () => {
 					thisTarget.removeAttribute("style");
 					thisTarget = null;
@@ -104,6 +114,19 @@ document.addEventListener("DOMContentLoaded", () => {
 					resetDragable();
 				}
 			});
+		});
+
+		saveBtn.addEventListener("click", (e) => {
+			let favoriteListContainerInner = favoriteListContainer.getElementsByTagName("ul");
+
+			if(favoriteListContainerInner[0] != undefined && favoriteListContainerInner[0].childElementCount > 0) {
+				localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+				localStorage.setItem("vkList", JSON.stringify(vkList));
+				alert("Сохранено!");
+			} else {
+				alert("Очищено!");
+				localStorage.clear();
+			}
 		});
 
 	}).catch((e) => { alert(`Ошибка: ${e.message}`); });
