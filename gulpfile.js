@@ -21,6 +21,16 @@ gulp.task('scripts', function() {
 		.pipe(browserSync.stream());
 });
 
+gulp.task('build-tests', function() {
+
+	gulp.src(tplPath + 'scripts/tests/main.js')
+		.pipe(plumber())
+		.pipe(browserify())
+		.pipe(rename("tests.build.js"))
+		.pipe(gulp.dest(tplPath +'/app/'))
+		.pipe(browserSync.stream());
+});
+
 gulp.task('jade', function () {
 	gulp.src(tplPath + '/jade/*.jade')
 		.pipe(plumber())
@@ -47,13 +57,19 @@ gulp.task('server', function(){
 	});
 });
 
-gulp.task('watch', ['jade', 'sass', 'scripts', 'server'], function () {
-	watch(tplPath + '/scripts/**/*.js', function(){
+gulp.task('watch', ['jade', 'sass', 'scripts', 'build-tests', 'server'], function () {
+	watch([tplPath + '/scripts/**/*.js', !tplPath + '/scripts/tests/**/*.js'], function(){
 		gulp.start("scripts");
 	});
+
+	watch(tplPath + '/scripts/tests/**/*.js', function(){
+		gulp.start("build-tests");
+	});
+
 	watch(tplPath + '/jade/**/*.jade', function(){
 		gulp.start("jade");
 	});
+
 	watch(tplPath + '/sass/**/*.sass', function(){
 		gulp.start("sass");
 	});
