@@ -20,5 +20,17 @@ module.exports = {
 				}
 			}, 2);
 		});
-	}
+	},
+
+	callVkApi(method, params) {
+		return new Promise((resolve, reject) => {
+			VK.Api.call(method, params, (res) => {
+				if(res) {
+					resolve(res);
+				} else {
+					reject(new Error("Ошибка в методе callVkApi"));
+				}
+			});
+		});
+	},
 };

@@ -23,6 +23,10 @@ describe("Vk friends list", () => {
 		it("VK Auth", () => {
 			return assert.isFulfilled(Model.login());
 		});
+
+		it("callVkApi", () => {
+			return assert.isFulfilled(Model.callVkApi("friends.get", {v:5.53}));
+		});
 	});
 });
 
