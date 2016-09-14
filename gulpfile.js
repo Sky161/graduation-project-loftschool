@@ -8,6 +8,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var watch = require('gulp-watch');
 var jade = require('gulp-jade');
+var babel = require('gulp-babel');
+var uglify = require('gulp-uglify');
 
 var tplPath = './';
 
@@ -76,3 +78,16 @@ gulp.task('watch', ['jade', 'sass', 'scripts', 'build-tests', 'server'], functio
 });
 
 gulp.task('default', ['jade', 'sass', 'scripts']);
+
+gulp.task('compress-js', function () {
+	setTimeout(function() {
+		gulp.src(tplPath + 'app/build.js')
+			.pipe(babel({
+				presets: ['es2015']
+			}))
+			.pipe(uglify())
+			.pipe(gulp.dest(tplPath + '/app/'));
+	}, 500);
+});
+
+gulp.task('prod', ['default', 'compress-js']);
