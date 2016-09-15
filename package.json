@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "This if graduation project for online education Loftschool",
   "main": "gulpfile.js",
-  "browserify": {
-    "transform": [
-      ["jadeify", { "pretty": true,  "compileDebug": true }]
-    ]
-  },
   "devDependencies": {
     "babel-preset-es2015": "^6.14.0",
     "bower": "^1.7.9",
@@ -29,20 +24,12 @@
   },
   "browserify": {
     "transform": [
-      [
-        "jadeify",
-        {
-          "pretty": true,
-          "compileDebug": true
-        }
-      ]
-    ],
-    "browser": {
-      "mocha": "./app/components/mocha/mocha.js"
-    },
-    "browserify-shim": {
-      "mocha": "mocha"
-    }
+      "browserify-shim",
+      ["jadeify", { "pretty": true,  "compileDebug": true }]
+     ]
+  },
+  "browserify-shim": {
+    "./app/components/mocha/mocha.js": "mocha"
   },
   "scripts": {
     "postinstall": "bower i && gulp"
