@@ -7,7 +7,12 @@
  */
 "use strict";
 
-module.exports = {
+class Model{
+	constructor() {
+		this.vkList = {};
+		this.favoriteList = {};
+	}
+
 	login() {
 		return new Promise((resolve, reject) => {
 			VK.init({ apiId: 5597966 });
@@ -20,7 +25,7 @@ module.exports = {
 				}
 			}, 2);
 		});
-	},
+	}
 
 	callVkApi(method, params) {
 		return new Promise((resolve, reject) => {
@@ -32,5 +37,23 @@ module.exports = {
 				}
 			});
 		});
-	},
-};
+	}
+
+	getFriends() {
+		return new Promise((resolve, reject) => {
+			this.callVkApi("friends.get", {
+				v: "5.53",
+				fields: "photo_50"
+			}).then((result) => {
+				if(result) {
+					resolve(result);
+				} else {
+					reject(new Error("Друзья не получены"));
+				}
+
+			})
+		})
+	}
+}
+
+module.exports = new Model();

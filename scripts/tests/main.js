@@ -27,6 +27,10 @@ describe("Vk friends list", () => {
 		it("callVkApi", () => {
 			return assert.isFulfilled(Model.callVkApi("friends.get", {v:5.53}));
 		});
+
+		it("getFriends", () => {
+			return expect(Model.getFriends()).to.eventually.have.deep.property("response.count");
+		});
 	});
 });
 

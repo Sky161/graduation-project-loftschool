@@ -60,11 +60,8 @@ gulp.task('server', function(){
 });
 
 gulp.task('watch', ['jade', 'sass', 'scripts', 'build-tests', 'server'], function () {
-	watch([tplPath + '/scripts/**/*.js', !tplPath + '/scripts/tests/**/*.js'], function(){
+	watch(tplPath + '/scripts/**/*.js', function(){
 		gulp.start("scripts");
-	});
-
-	watch(tplPath + '/scripts/tests/**/*.js', function(){
 		gulp.start("build-tests");
 	});
 
