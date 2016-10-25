@@ -11,15 +11,15 @@ const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
 const assert = chai.assert;
 const expect = chai.expect;
-require("mocha");
 
 mocha.setup('bdd');
 chai.use(chaiAsPromised);
 
 const Model = require("../model.js");
+const View = require("../view.js");
 
 describe("Vk friends list", () => {
-	describe("Тестирование модели", () => {
+	describe("Тестирование model", () => {
 		it("VK Auth", () => {
 			return assert.isFulfilled(Model.login());
 		});
