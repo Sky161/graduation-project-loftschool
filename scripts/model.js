@@ -46,6 +46,7 @@ class Model{
 				fields: "photo_50"
 			}).then((result) => {
 				if(result) {
+					this.vkList = result.response.items;
 					resolve(result);
 				} else {
 					reject(new Error("Друзья не получены"));

@@ -8,12 +8,21 @@
 "use strict";
 const model = require("./model.js");
 const view = require("./view.js");
+const controller = require("./controller.js");
 
 window.onload = () => {
 	model.login().then(() => {
 		model.getFriends().then((res) => {
-			view.renderFriends(res.response.items);
+			view.renderFriends(model.vkList);
 			view.renderFavorite(model.favoriteList);
+
+			const main = document.body.querySelector(".container");
+			const searchInp = main.querySelector("#search-friends");
+
+			searchInp.addEventListener("input", (e) => {
+				const val = e.target.value;
+				controller.search(val, model.vkList, view.renderFriends);
+			});
 		});
 	});
 }
